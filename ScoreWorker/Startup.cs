@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 using Refit;
-using SampleSolution.Services;
-using SampleSolution.Services.Interfaces;
+using ScoreWorker.Domain.Services;
+using ScoreWorker.Domain.Services.Interfaces;
 using ScoreWorker.Mapping;
 using ScoreWorker.RefitApi;
 using ScoreWorkerDB;

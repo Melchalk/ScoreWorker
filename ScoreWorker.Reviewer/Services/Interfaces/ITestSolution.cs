@@ -1,4 +1,4 @@
-﻿namespace SampleSolution.Services.Interfaces;
+﻿namespace ScoreWorker.Domain.Services.Interfaces;
 
 public interface ITestSolution
 {

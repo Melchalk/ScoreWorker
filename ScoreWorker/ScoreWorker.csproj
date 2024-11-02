@@ -38,7 +38,7 @@
     <ProjectReference Include="..\RefitApi\ScoreWorker.RefitApi.csproj" />
     <ProjectReference Include="..\SampleSolution\SampleSolution.csproj" />
     <ProjectReference Include="..\ScoreWorker.Models\ScoreWorker.Models.csproj" />
-    <ProjectReference Include="..\ScoreWorker.Reviewer\ScoreWorker.Reviewer.csproj" />
+    <ProjectReference Include="..\ScoreWorker.Reviewer\ScoreWorker.Domain.csproj" />
   </ItemGroup>
 
 </Project>

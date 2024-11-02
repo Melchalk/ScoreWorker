@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SampleSolution.Services.Interfaces;
+using ScoreWorker.Domain.Services.Interfaces;
 
 namespace ScoreWorker.Controllers;
 

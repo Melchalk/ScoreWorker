@@ -15,4 +15,8 @@
     <ProjectReference Include="..\ScoreWorker.Models\ScoreWorker.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\Interfaces\" />
+  </ItemGroup>
+
 </Project>

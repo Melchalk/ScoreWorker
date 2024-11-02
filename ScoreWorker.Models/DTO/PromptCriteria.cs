@@ -1,4 +1,4 @@
-﻿namespace ScoreWorkerDB.SummariesDB.Summary;
+﻿namespace ScoreWorker.Models.DTO;
 
 public class PromptCriteria
 {

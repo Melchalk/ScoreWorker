@@ -1,10 +1,10 @@
 ﻿using Refit;
-using SampleSolution.Services.Interfaces;
+using ScoreWorker.Domain.Services.Interfaces;
 using ScoreWorker.Models.DTO;
 using ScoreWorker.RefitApi;
 using System.Text.Json;
 
-namespace SampleSolution.Services;
+namespace ScoreWorker.Domain.Services;
 
 public class TestSolution : ITestSolution
 {
