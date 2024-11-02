@@ -97,6 +97,6 @@ public class Startup
         using var context = serviceScope.ServiceProvider
             .GetService<ReviewDbContext>();
 
-        context!.Database.Migrate();
+        //context!.Database.Migrate();
     }
 }

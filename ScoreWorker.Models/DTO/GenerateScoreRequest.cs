@@ -14,7 +14,7 @@ public class GenerateScoreRequest
     public required string SystemPrompt { get; set; }
 
     [JsonPropertyName("max_tokens")]
-    public int MaxTokens { get; set; }
+    public int? MaxTokens { get; set; }
 
     [JsonPropertyName("n")]
     public int N { get; set; }

@@ -64,7 +64,7 @@ public class ScoreWorkerService : IScoreWorkerService
             Prompt = prompt,
             ApplyChatTemplate = true,
             SystemPrompt = "You are a helpful assistant.",
-            MaxTokens = 400,
+            //MaxTokens = 1000,
             N = 1,
             Temperature = 0.7
         };
