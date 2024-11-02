@@ -18,14 +18,14 @@ Analyze every review based on it's connotations about the employee and assign it
 If a review doesn't hold any relevant information about the employee, assign it with an "invalid" rating instead.
 
 The commentaties and the conclusion should be presented in Russian.
-As an example of how to present your answer, use the following text:
+As an example of how to present your answer, use the following text (names of the qualities should be written without spaces between words):
 
 
 Leadership: 5
 (add comment here)
-Communication Skills: 5
+CommunicationSkills: 5
 (add comment here)
-Problem Solving: 5
+ProblemSolving: 5
 (add comment here)
 Teamwork: 4
 (add comment here)
@@ -34,9 +34,9 @@ Adaptability: 4
 
 This employee is... (add your conclusion here)
 
-1: negative
-2: positive
-3: positive
-4: invalid
-5: positive
-6: negative
+1: Negative
+2: Positive
+3: Positive
+4: Invalid
+5: Positive
+6: Negative
