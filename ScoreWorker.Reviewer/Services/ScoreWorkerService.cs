@@ -48,7 +48,7 @@ public class ScoreWorkerService : IScoreWorkerService
         StringBuilder builder = new();
 
         for (int i = 1; i <= reviews.Count; i++)
-            builder.AppendLine($"Review {i}:\n{reviews[i].Review}");
+            builder.AppendLine($"Review {i}:\n{reviews[i-1].Review}");
 
         string jsonString = await File.ReadAllTextAsync(filePrompt);
 
@@ -63,9 +63,9 @@ public class ScoreWorkerService : IScoreWorkerService
         {
             Prompt = prompt,
             ApplyChatTemplate = true,
-            SystemPrompt = "You are a helpful assistant.",
+            SystemPrompt = "You are a helpful assistant of an HR speacialist that rates employees of the company they work at.",
             N = 1,
-            Temperature = 0.7
+            Temperature = 0.4
         };
 
         return await apiService.GetProductsList(request);

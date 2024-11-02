@@ -2,6 +2,7 @@
 using ScoreWorker.Domain.Services.Interfaces;
 using ScoreWorker.Models.DTO;
 using ScoreWorker.RefitApi;
+using System.Text;
 using System.Text.Json;
 
 namespace ScoreWorker.Domain.Services;
@@ -9,12 +10,13 @@ namespace ScoreWorker.Domain.Services;
 public class TestSolution : ITestSolution
 {
     private const string file = "sample_reviews.json";
+    private const string filePrompt = "prompt.txt";
 
     public async Task<string> GetResponse()
     {
         var reviews = await LoadReviews();
 
-        var prompt = PreparePrompt(reviews);
+        var prompt = await PreparePrompt(reviews);
 
         return await EvaluateReviewsWithLLM(prompt);
     }
@@ -26,17 +28,16 @@ public class TestSolution : ITestSolution
         return JsonSerializer.Deserialize<List<ReviewInfo>>(jsonString);
     }
 
-    public string PreparePrompt(List<ReviewInfo> reviews)
+    private async Task<string> PreparePrompt(List<ReviewInfo> reviews)
     {
-        string prompt = "Here are some reviews about an employee:\n\n";
-        for (int i = 0; i < reviews.Count; i++)
-            prompt += $"Review {i}:\n{reviews[i].Review}\n\n";
+        StringBuilder builder = new();
 
-        prompt += "Based on these reviews, evaluate the employee on a scale from 1 to 5 for the following criteria:\n";
-        prompt += "1. Professionalism\n2. Teamwork\n3. Communication\n4. Initiative\n5. Overall Performance\n";
-        prompt += "Add short (5 sentences) explanation for each score you assigned.";
+        for (int i = 1; i <= reviews.Count; i++)
+            builder.AppendLine($"Review {i}:\n{reviews[i-1].Review}");
 
-        return prompt;
+        string jsonString = await File.ReadAllTextAsync(filePrompt);
+
+        return string.Format(jsonString, builder.ToString());
     }
 
     public async Task<string> EvaluateReviewsWithLLM(string prompt)
