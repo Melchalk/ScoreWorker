@@ -1,0 +1,22 @@
+﻿{
+  "profiles": {
+    "Development": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": false,
+      "externalUrlConfiguration": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "Production": {
+      "commandName": "Project",
+      "dotnetRunMessages": false,
+      "launchBrowser": false,
+      "externalUrlConfiguration": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Production"
+      }
+    }
+  }
+}
