@@ -11,8 +11,8 @@ namespace ScoreWorker.Domain.Services;
 
 public class ScoreWorkerService : IScoreWorkerService
 {
-    private const string file = "review_dataset.json";
-    private const string filePrompt = "prompt.txt";
+    private const string fileDb = "review_dataset.json";
+    private const string mainPrompt = "prompt.txt";
 
     private readonly IDataProvider _provider;
     private readonly IMapper _mapper;
@@ -25,20 +25,23 @@ public class ScoreWorkerService : IScoreWorkerService
         _mapper = mapper;
     }
 
-    public async Task<string> GetResponse(int id)
+    #region Main
+
+    public async Task<string> GetMainSummary(int id)
     {
         var allReviews = await LoadReviews();
 
-        var reviews = allReviews.Where(r => r.IDUnderReview == id).ToList();
-
+        var reviews = allReviews!
+            .Where(r => r.IDUnderReview == id && r.IDReviewer != id)
+            .ToList();
         var prompt = await PreparePrompt(reviews);
 
         return await EvaluateReviewsWithLLM(prompt);
     }
 
-    public async Task<List<ReviewInfo>?> LoadReviews()
+    private async Task<List<ReviewInfo>?> LoadReviews()
     {
-        string jsonString = await File.ReadAllTextAsync(file);
+        string jsonString = await File.ReadAllTextAsync(fileDb);
 
         return JsonSerializer.Deserialize<List<ReviewInfo>>(jsonString);
     }
@@ -50,7 +53,7 @@ public class ScoreWorkerService : IScoreWorkerService
         for (int i = 1; i <= reviews.Count; i++)
             builder.AppendLine($"Review {i}:\n{reviews[i].Review}");
 
-        string jsonString = await File.ReadAllTextAsync(filePrompt);
+        string jsonString = await File.ReadAllTextAsync(mainPrompt);
 
         return string.Format(jsonString, builder.ToString());
     }
@@ -68,6 +71,25 @@ public class ScoreWorkerService : IScoreWorkerService
             Temperature = 0.7
         };
 
-        return await apiService.GetProductsList(request);
+        return await apiService.GenerateScore(request);
     }
+
+    #endregion
+
+    #region Self
+
+    public async Task<string> GetSelfSummary(int id)
+    {
+        var allReviews = await LoadReviews();
+
+        var reviews = allReviews!
+            .Where(r => r.IDUnderReview == id && r.IDReviewer != id)
+            .ToList();
+
+        var prompt = await PreparePrompt(reviews);
+
+        return await EvaluateReviewsWithLLM(prompt);
+    }
+
+    #endregion
 }

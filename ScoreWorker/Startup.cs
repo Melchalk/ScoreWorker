@@ -36,7 +36,7 @@ public class Startup
             });
 
 
-        services.AddDbContext<ReviewDbContext>(options =>
+        services.AddDbContext<ScoreWorkerDbContext>(options =>
         {
             options.UseNpgsql(Configuration.GetConnectionString("SQLConnectionString"));
         });
@@ -50,7 +50,7 @@ public class Startup
 
         services.AddRefitClient<IVkControllerApi>();
 
-        services.AddScoped<IDataProvider, ReviewDbContext>();
+        services.AddScoped<IDataProvider, ScoreWorkerDbContext>();
 
         services.AddScoped<ITestSolution, TestSolution>();
         services.AddScoped<IScoreWorkerService, ScoreWorkerService>();
@@ -95,8 +95,8 @@ public class Startup
             .CreateScope();
 
         using var context = serviceScope.ServiceProvider
-            .GetService<ReviewDbContext>();
+            .GetService<ScoreWorkerDbContext>();
 
-        //context!.Database.Migrate();
+        context!.Database.Migrate();
     }
 }

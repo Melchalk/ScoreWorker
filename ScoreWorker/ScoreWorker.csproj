@@ -34,10 +34,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DB\ScoreWorkerDB.csproj" />
-    <ProjectReference Include="..\RefitApi\ScoreWorker.RefitApi.csproj" />
+    <ProjectReference Include="..\DB\ScoreWorker.DB.csproj" />
     <ProjectReference Include="..\SampleSolution\SampleSolution.csproj" />
     <ProjectReference Include="..\ScoreWorker.Models\ScoreWorker.Models.csproj" />
+    <ProjectReference Include="..\ScoreWorker.RefitApi\ScoreWorker.RefitApi.csproj" />
     <ProjectReference Include="..\ScoreWorker.Reviewer\ScoreWorker.Domain.csproj" />
   </ItemGroup>
 

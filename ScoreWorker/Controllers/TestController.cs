@@ -12,4 +12,11 @@ public class TestController([FromServices] ITestSolution sampleSolution) : Contr
     {
         return await sampleSolution.GetResponse();
     }
+
+    [HttpGet("update/database")]
+    public async Task UpdateDatabasByFile(CancellationToken token)
+    {
+
+    }
+
 }
