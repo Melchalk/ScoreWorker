@@ -65,7 +65,7 @@ public class ScoreWorkerService : IScoreWorkerService
             ApplyChatTemplate = true,
             SystemPrompt = "You are a helpful assistant of an HR speacialist that rates employees of the company they work at.",
             N = 1,
-            Temperature = 0.4
+            Temperature = 0.3
         };
 
         return await apiService.GetProductsList(request);

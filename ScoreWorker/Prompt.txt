@@ -11,15 +11,32 @@ Adaptability
 For each criterion:
 
 Assign a score on a 5-point scale (where 1 represents low performance and 5 represents high performance).
-Provide a brief comment using appropriate terminology and vocabulary related to the criterion.
+Provide a brief comment using appropriate terminology and vocabulary related to the criterion. To prove your point, you may quote a few reviews that mention that quality. Do not mention review ID's.
+Based on those scores and comments, provide the conclusion about the employee in a few sentences.
 
-After providing this information, do the following:
-Evaluate the level of constructivity of those reviews without printing out the result (constructive reviews specify and highlight different skills of the worker without leaning into personal bias, as well as provide feedback on multiple of their skills). Also evaluate if the review is positive or negative. Based on that evaluation, give every review a rank of constructivity (constructive, unconstructive) and a rank of positivity. If the review holds no information relevant to the worker, mark it as Irrelevant.
+Analyze every review based on it's connotations about the employee and assign it a rating (poisitive or negative). 
+If a review doesn't hold any relevant information about the employee, assign it with an "invalid" rating instead.
 
-PositiveConstructive
-PositiveUnconstructive
-Irrelevant
-NegativeConstructive
-NegativeUnconstructive
+The commentaties and the conclusion should be presented in Russian.
+As an example of how to present your answer, use the following text:
 
-Count and report the total amount of comments that fall into each of the five categories.
+
+Leadership: 5
+(add comment here)
+Communication Skills: 5
+(add comment here)
+Problem Solving: 5
+(add comment here)
+Teamwork: 4
+(add comment here)
+Adaptability: 4
+(add comment here)
+
+This employee is... (add your conclusion here)
+
+1: negative
+2: positive
+3: positive
+4: invalid
+5: positive
+6: negative
