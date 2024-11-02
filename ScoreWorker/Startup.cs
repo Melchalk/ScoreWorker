@@ -1,8 +1,12 @@
-﻿using Refit;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.HttpOverrides;
-using ScoreWorker.RefitApi;
-using SampleSolution.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using Refit;
 using SampleSolution.Services;
+using SampleSolution.Services.Interfaces;
+using ScoreWorker.Mapping;
+using ScoreWorker.RefitApi;
+using ScoreWorkerDB;
 
 namespace ScoreWorker;
 
@@ -29,12 +33,25 @@ public class Startup
                         .AllowAnyHeader()
                 );
             });
+
+
+        services.AddDbContext<ReviewDbContext>(options =>
+        {
+            options.UseNpgsql(Configuration.GetConnectionString("SQLConnectionString"));
+        });
+
+        services.AddSingleton(new MapperConfiguration(mc =>
+        {
+            mc.AddProfile<MappingProfile>();
+        }).CreateMapper());
+
         services.AddControllers();
 
         services.AddHttpContextAccessor();
         services.AddRefitClient<IVkControllerApi>();
 
-        services.AddScoped<ITestSolution, SampleSolution>();
+        services.AddScoped<ITestSolution, TestSolution>();
+        services.AddScoped<IScoreWorkerService, ScoreWorkerService>();
 
         services.AddSwaggerGen();
     }
@@ -56,6 +73,8 @@ public class Startup
 
         app.UseHttpsRedirection();
 
+        UpdateDatabase(app);
+
         app.UseRouting();
         app.UseCors("CorsPolicy");
 
@@ -63,5 +82,17 @@ public class Startup
         {
             endpoints.MapControllers().RequireCors("CorsPolicy");
         });
+    }
+
+    private void UpdateDatabase(IApplicationBuilder app)
+    {
+        using var serviceScope = app.ApplicationServices
+            .GetRequiredService<IServiceScopeFactory>()
+            .CreateScope();
+
+        using var context = serviceScope.ServiceProvider
+            .GetService<ReviewDbContext>();
+
+        context!.Database.Migrate();
     }
 }

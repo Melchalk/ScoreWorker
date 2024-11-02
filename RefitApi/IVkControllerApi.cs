@@ -1,5 +1,5 @@
 using Refit;
-using ScoreWorker.Models;
+using ScoreWorker.Models.DTO;
 
 namespace ScoreWorker.RefitApi;
 

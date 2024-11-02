@@ -1,6 +1,6 @@
 ﻿using Refit;
 using SampleSolution.Services.Interfaces;
-using ScoreWorker.Models;
+using ScoreWorker.Models.DTO;
 using ScoreWorker.RefitApi;
 using System.Text.Json;
 
@@ -8,8 +8,7 @@ namespace SampleSolution.Services;
 
 public class TestSolution : ITestSolution
 {
-    private const string file = "sample_reviews.json";
-    private const string url = "https://vk-scoreworker-case-backup.olymp.innopolis.university/generate";
+    private const string file = @"\SampleSolution\sample_reviews.json";
 
     public async Task<string> GetResponse()
     {
