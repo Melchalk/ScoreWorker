@@ -7,6 +7,7 @@ using SampleSolution.Services.Interfaces;
 using ScoreWorker.Mapping;
 using ScoreWorker.RefitApi;
 using ScoreWorkerDB;
+using ScoreWorkerDB.Interfaces;
 
 namespace ScoreWorker;
 
@@ -47,11 +48,14 @@ public class Startup
 
         services.AddControllers();
 
-        services.AddHttpContextAccessor();
         services.AddRefitClient<IVkControllerApi>();
+
+        services.AddScoped<IDataProvider, ReviewDbContext>();
 
         services.AddScoped<ITestSolution, TestSolution>();
         services.AddScoped<IScoreWorkerService, ScoreWorkerService>();
+
+        services.AddHttpContextAccessor();
 
         services.AddSwaggerGen();
     }

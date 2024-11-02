@@ -1,7 +1,9 @@
-﻿using Refit;
+﻿using AutoMapper;
+using Refit;
 using SampleSolution.Services.Interfaces;
 using ScoreWorker.Models.DTO;
 using ScoreWorker.RefitApi;
+using ScoreWorkerDB.Interfaces;
 using System.Text;
 using System.Text.Json;
 
@@ -10,6 +12,18 @@ namespace SampleSolution.Services;
 public class ScoreWorkerService : IScoreWorkerService
 {
     private const string file = "review_dataset.json";
+    private const string filePrompt = "prompt.txt";
+
+    private readonly IDataProvider _provider;
+    private readonly IMapper _mapper;
+
+    public ScoreWorkerService(
+        IDataProvider provider,
+        IMapper mapper)
+    {
+        _provider = provider;
+        _mapper = mapper;
+    }
 
     public async Task<string> GetResponse(int id)
     {
@@ -17,7 +31,7 @@ public class ScoreWorkerService : IScoreWorkerService
 
         var reviews = allReviews.Where(r => r.IDUnderReview == id).ToList();
 
-        var prompt = PreparePrompt(reviews);
+        var prompt = await PreparePrompt(reviews);
 
         return await EvaluateReviewsWithLLM(prompt);
     }
@@ -29,22 +43,19 @@ public class ScoreWorkerService : IScoreWorkerService
         return JsonSerializer.Deserialize<List<ReviewInfo>>(jsonString);
     }
 
-    public string PreparePrompt(List<ReviewInfo> reviews)
+    private async Task<string> PreparePrompt(List<ReviewInfo> reviews)
     {
-        StringBuilder builder = new StringBuilder();
+        StringBuilder builder = new();
 
-        builder.AppendLine("Here are some reviews about an employee:");
         for (int i = 0; i < reviews.Count; i++)
             builder.AppendLine($"Review {i}:\n{reviews[i].Review}");
 
-        builder.AppendLine("Based on these reviews, evaluate the employee on a scale from 1 to 5 for the following criteria:");
-        builder.AppendLine("1. Professionalism\n2. Teamwork\n3. Communication\n4. Initiative\n5. Overall Performance");
-        builder.AppendLine("Add short (5 sentences) explanation for each score you assigned.");
+        string jsonString = await File.ReadAllTextAsync(filePrompt);
 
-        return builder.ToString();
+        return string.Format(jsonString, builder.ToString());
     }
 
-    public async Task<string> EvaluateReviewsWithLLM(string prompt)
+    private async Task<string> EvaluateReviewsWithLLM(string prompt)
     {
         var apiService = RestService.For<IVkControllerApi>(IVkControllerApi.VkScoreWorkerApi);
 

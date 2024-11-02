@@ -8,7 +8,7 @@ namespace SampleSolution.Services;
 
 public class TestSolution : ITestSolution
 {
-    private const string file = @"\SampleSolution\sample_reviews.json";
+    private const string file = "sample_reviews.json";
 
     public async Task<string> GetResponse()
     {

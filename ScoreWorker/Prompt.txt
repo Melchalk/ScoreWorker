@@ -1,0 +1,24 @@
+Here are some reviews about an employee:
+{0}
+
+Based on the provided employee review, please evaluate the employee according to the following criteria:
+
+Leadership
+Communication Skills
+Problem Solving
+Teamwork
+Adaptability
+For each criterion:
+
+Assign a score on a 5-point scale (where 1 represents low performance and 5 represents high performance).
+Provide a brief comment using appropriate terminology and vocabulary related to the criterion.
+After providing the evaluations for each criterion, please:
+evaluate the level of constructivity of those reviews (constructive reviews specify and highlight different skills of the worker without leaning into personal bias, as well as provide feedback on multiple of their skills). Also evaluate if the review is positive or negative. Based on that evaluation, give every review a rank of constructivity (constructive, unconstructive) and a rank of positivity. If the review holds no information relevant to the worker, mark it as Irrelevant.
+Categorize each of your comments into one of the following categories:
+
+PositiveConstructive
+PositiveUnconstructive
+Irrelevantv
+NegativeConstructive
+NegativeUnconstructive
+Count and report the total number of comments that fall into each category

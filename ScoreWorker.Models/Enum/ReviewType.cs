@@ -4,6 +4,7 @@ public enum ReviewType
 {
     PositiveConstructive,
     PositiveUnconstructive,
+    Irrelevant,
     NegativeConstructive,
     NegativeUnconstructive
 }
