@@ -26,8 +26,6 @@ public class ScoreWorkerService : IScoreWorkerService
         _mapper = mapper;
     }
 
-    #region Main
-
     public async Task<string> GetMainSummary(int id, CancellationToken cancellationToken)
     {
         var dbReviews = _provider.Reviews
@@ -42,19 +40,41 @@ public class ScoreWorkerService : IScoreWorkerService
         var reviews = await _mapper.ProjectTo<ReviewInfo>(dbReviews)
             .ToListAsync(cancellationToken);
 
-        var prompt = await PreparePrompt(reviews, cancellationToken);
+        var prompt = await PreparePrompt(mainPrompt, reviews, cancellationToken);
 
         return await EvaluateReviewsWithLLM(prompt, cancellationToken);
     }
 
-    private async Task<string> PreparePrompt(List<ReviewInfo> reviews, CancellationToken cancellationToken)
+    public async Task<string> GetSelfSummary(int id, CancellationToken cancellationToken)
+    {
+        var dbReviews = _provider.Reviews
+            .AsNoTracking()
+            .Where(r => r.IDUnderReview == id && r.IDReviewer == id);
+
+        if (!dbReviews.Any())
+        {
+            throw new BadRequestException($"Reviews with IDUnderReview = '{id}' was not found.");
+        }
+
+        var reviews = await _mapper.ProjectTo<ReviewInfo>(dbReviews)
+            .ToListAsync(cancellationToken);
+
+        var prompt = await PreparePrompt(selfPrompt, reviews, cancellationToken);
+
+        return await EvaluateReviewsWithLLM(prompt, cancellationToken);
+    }
+
+    #region Private
+
+    private async Task<string> PreparePrompt(
+        string filePrompt, List<ReviewInfo> reviews, CancellationToken cancellationToken)
     {
         StringBuilder builder = new();
 
         for (int i = 1; i <= reviews.Count; i++)
             builder.AppendLine($"Review {i}:\n{reviews[i - 1].Review}");
 
-        string samplePrompt = await File.ReadAllTextAsync(mainPrompt, cancellationToken);
+        string samplePrompt = await File.ReadAllTextAsync(filePrompt, cancellationToken);
 
         return string.Format(samplePrompt, builder.ToString());
     }
@@ -73,29 +93,6 @@ public class ScoreWorkerService : IScoreWorkerService
         };
 
         return await apiService.GenerateScore(request);
-    }
-
-    #endregion
-
-    #region Self
-
-    public async Task<string> GetSelfSummary(int id, CancellationToken cancellationToken)
-    {
-        var dbReviews = _provider.Reviews
-            .AsNoTracking()
-            .Where(r => r.IDUnderReview == id && r.IDReviewer == id);
-
-        if (!dbReviews.Any())
-        {
-            throw new BadRequestException($"Reviews with IDUnderReview = '{id}' was not found.");
-        }
-
-        var reviews = await _mapper.ProjectTo<ReviewInfo>(dbReviews)
-            .ToListAsync(cancellationToken);
-
-        var prompt = await File.ReadAllTextAsync(selfPrompt, cancellationToken);
-
-        return await EvaluateReviewsWithLLM(prompt, cancellationToken);
     }
 
     #endregion
