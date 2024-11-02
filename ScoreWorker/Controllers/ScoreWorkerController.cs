@@ -10,6 +10,6 @@ public class ScoreWorkerController([FromServices] IScoreWorkerService service) :
     [HttpGet("generate")]
     public async Task<string> GetTestScore([FromQuery] int id, CancellationToken token)
     {
-        return await service.GetMainSummary(id);
+        return await service.GetMainSummary(id, token);
     }
 }

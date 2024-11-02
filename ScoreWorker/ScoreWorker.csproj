@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -22,6 +22,7 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.1" />
     <PackageReference Include="Refit" Version="7.2.1" />
     <PackageReference Include="Refit.HttpClientFactory" Version="7.2.1" />
+    <PackageReference Include="Serilog" Version="4.1.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
@@ -36,6 +37,7 @@
   <ItemGroup>
     <ProjectReference Include="..\DB\ScoreWorker.DB.csproj" />
     <ProjectReference Include="..\SampleSolution\SampleSolution.csproj" />
+    <ProjectReference Include="..\ScoreWorker.Models.Exceptions\ScoreWorker.Models.Exceptions.csproj" />
     <ProjectReference Include="..\ScoreWorker.Models\ScoreWorker.Models.csproj" />
     <ProjectReference Include="..\ScoreWorker.RefitApi\ScoreWorker.RefitApi.csproj" />
     <ProjectReference Include="..\ScoreWorker.Reviewer\ScoreWorker.Domain.csproj" />

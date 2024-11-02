@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using Refit;
+using ScoreWorker.DB.Interfaces;
 using ScoreWorker.Domain.Services.Interfaces;
 using ScoreWorker.Models.DTO;
 using ScoreWorker.RefitApi;
-using ScoreWorkerDB.Interfaces;
 using System.Text;
 using System.Text.Json;
 
@@ -27,38 +27,38 @@ public class ScoreWorkerService : IScoreWorkerService
 
     #region Main
 
-    public async Task<string> GetMainSummary(int id)
+    public async Task<string> GetMainSummary(int id, CancellationToken cancellationToken)
     {
-        var allReviews = await LoadReviews();
+        var allReviews = await LoadReviews(cancellationToken);
 
         var reviews = allReviews!
             .Where(r => r.IDUnderReview == id && r.IDReviewer != id)
             .ToList();
-        var prompt = await PreparePrompt(reviews);
+        var prompt = await PreparePrompt(reviews, cancellationToken);
 
-        return await EvaluateReviewsWithLLM(prompt);
+        return await EvaluateReviewsWithLLM(prompt, cancellationToken);
     }
 
-    private async Task<List<ReviewInfo>?> LoadReviews()
+    private async Task<List<ReviewInfo>?> LoadReviews(CancellationToken cancellationToken)
     {
-        string jsonString = await File.ReadAllTextAsync(fileDb);
+        string jsonString = await File.ReadAllTextAsync(fileDb, cancellationToken);
 
         return JsonSerializer.Deserialize<List<ReviewInfo>>(jsonString);
     }
 
-    private async Task<string> PreparePrompt(List<ReviewInfo> reviews)
+    private async Task<string> PreparePrompt(List<ReviewInfo> reviews, CancellationToken cancellationToken)
     {
         StringBuilder builder = new();
 
         for (int i = 1; i <= reviews.Count; i++)
             builder.AppendLine($"Review {i}:\n{reviews[i-1].Review}");
 
-        string jsonString = await File.ReadAllTextAsync(mainPrompt);
+        string jsonString = await File.ReadAllTextAsync(mainPrompt, cancellationToken);
 
         return string.Format(jsonString, builder.ToString());
     }
 
-    private async Task<string> EvaluateReviewsWithLLM(string prompt)
+    private async Task<string> EvaluateReviewsWithLLM(string prompt, CancellationToken cancellationToken)
     {
         var apiService = RestService.For<IVkControllerApi>(IVkControllerApi.VkScoreWorkerApi);
 
@@ -78,17 +78,17 @@ public class ScoreWorkerService : IScoreWorkerService
 
     #region Self
 
-    public async Task<string> GetSelfSummary(int id)
+    public async Task<string> GetSelfSummary(int id, CancellationToken cancellationToken)
     {
-        var allReviews = await LoadReviews();
+        var allReviews = await LoadReviews(cancellationToken);
 
         var reviews = allReviews!
             .Where(r => r.IDUnderReview == id && r.IDReviewer != id)
             .ToList();
 
-        var prompt = await PreparePrompt(reviews);
+        var prompt = await PreparePrompt(reviews, cancellationToken);
 
-        return await EvaluateReviewsWithLLM(prompt);
+        return await EvaluateReviewsWithLLM(prompt, cancellationToken);
     }
 
     #endregion

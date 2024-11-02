@@ -1,5 +1,8 @@
-﻿using Refit;
+﻿using AutoMapper;
+using Refit;
+using ScoreWorker.DB.Interfaces;
 using ScoreWorker.Domain.Services.Interfaces;
+using ScoreWorker.Models.Db;
 using ScoreWorker.Models.DTO;
 using ScoreWorker.RefitApi;
 using System.Text;
@@ -9,8 +12,20 @@ namespace ScoreWorker.Domain.Services;
 
 public class TestSolution : ITestSolution
 {
-    private const string file = "sample_reviews.json";
+    private const string fileTest = "sample_reviews.json";
+    private const string fileDb = "review_dataset.json";
     private const string filePrompt = "prompt.txt";
+
+    private readonly IDataProvider _provider;
+    private readonly IMapper _mapper;
+
+    public TestSolution(
+        IDataProvider provider,
+        IMapper mapper)
+    {
+        _provider = provider;
+        _mapper = mapper;
+    }
 
     public async Task<string> GetResponse()
     {
@@ -21,9 +36,24 @@ public class TestSolution : ITestSolution
         return await EvaluateReviewsWithLLM(prompt);
     }
 
-    public async Task<List<ReviewInfo>?> LoadReviews()
+    public async Task UpdateDatabase(CancellationToken cancellationToken)
     {
-        string jsonString = await File.ReadAllTextAsync(file);
+        string jsonString = await File.ReadAllTextAsync(fileDb, cancellationToken);
+
+        var reviews = JsonSerializer.Deserialize<List<ReviewInfo>>(jsonString);
+
+        var dbReviews = _mapper.ProjectTo<DbReview>(reviews.AsQueryable());
+
+        await _provider.Reviews.AddRangeAsync(dbReviews, cancellationToken);
+
+        await _provider.SaveAsync(cancellationToken);
+    }
+
+    #region Private
+
+    private async Task<List<ReviewInfo>?> LoadReviews()
+    {
+        string jsonString = await File.ReadAllTextAsync(fileTest);
 
         return JsonSerializer.Deserialize<List<ReviewInfo>>(jsonString);
     }
@@ -40,7 +70,7 @@ public class TestSolution : ITestSolution
         return string.Format(jsonString, builder.ToString());
     }
 
-    public async Task<string> EvaluateReviewsWithLLM(string prompt)
+    private async Task<string> EvaluateReviewsWithLLM(string prompt)
     {
         var apiService = RestService.For<IVkControllerApi>(IVkControllerApi.VkScoreWorkerApi);
 
@@ -56,4 +86,6 @@ public class TestSolution : ITestSolution
 
         return await apiService.GenerateScore(request);
     }
+
+    #endregion
 }

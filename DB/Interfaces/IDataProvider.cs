@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ScoreWorker.Models.Db;
 
-namespace ScoreWorkerDB.Interfaces;
+namespace ScoreWorker.DB.Interfaces;
 
 public interface IDataProvider : IBaseDataProvider
 {

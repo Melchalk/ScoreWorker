@@ -1,4 +1,4 @@
-﻿namespace ScoreWorkerDB.Interfaces;
+﻿namespace ScoreWorker.DB.Interfaces;
 
 public interface IBaseDataProvider
 {

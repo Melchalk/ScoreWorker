@@ -2,12 +2,13 @@
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 using Refit;
+using ScoreWorker.DB;
+using ScoreWorker.DB.Interfaces;
 using ScoreWorker.Domain.Services;
 using ScoreWorker.Domain.Services.Interfaces;
-using ScoreWorker.Mapping;
+using ScoreWorker.Infrastructure.Mapping;
+using ScoreWorker.Infrastructure.Middlewares;
 using ScoreWorker.RefitApi;
-using ScoreWorkerDB;
-using ScoreWorkerDB.Interfaces;
 
 namespace ScoreWorker;
 
@@ -77,6 +78,8 @@ public class Startup
 
         app.UseHttpsRedirection();
 
+        app.UseMiddleware<GlobalExceptionMiddleware>();
+
         UpdateDatabase(app);
 
         app.UseRouting();
@@ -97,6 +100,6 @@ public class Startup
         using var context = serviceScope.ServiceProvider
             .GetService<ScoreWorkerDbContext>();
 
-        context!.Database.Migrate();
+        //context!.Database.Migrate();
     }
 }

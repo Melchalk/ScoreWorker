@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ScoreWorker.DB.Interfaces;
 using ScoreWorker.Models.Db;
-using ScoreWorkerDB.Interfaces;
 using System.Reflection;
 
-namespace ScoreWorkerDB;
+namespace ScoreWorker.DB;
 
 public class ScoreWorkerDbContext : DbContext, IDataProvider
 {

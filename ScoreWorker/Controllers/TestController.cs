@@ -16,7 +16,7 @@ public class TestController([FromServices] ITestSolution sampleSolution) : Contr
     [HttpGet("update/database")]
     public async Task UpdateDatabasByFile(CancellationToken token)
     {
-
+        await sampleSolution.UpdateDatabase(token);
     }
 
 }

@@ -1,9 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
+using ScoreWorker.DB;
 using ScoreWorker.Models.Db;
 using ScoreWorker.Models.Enum;
 
-namespace ScoreWorkerDB.Migrations;
+namespace ScoreWorker.DB.Migrations;
 
 [DbContext(typeof(ScoreWorkerDbContext))]
 [Migration("021120241438_InitialCreate")]

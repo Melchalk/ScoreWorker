@@ -2,6 +2,6 @@
 
 public interface IScoreWorkerService
 {
-    public Task<string> GetMainSummary(int id);
-    public Task<string> GetSelfSummary(int id);
+    public Task<string> GetMainSummary(int id, CancellationToken cancellationToken);
+    public Task<string> GetSelfSummary(int id, CancellationToken cancellationToken);
 }

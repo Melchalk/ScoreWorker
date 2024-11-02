@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScoreWorker.RefitApi", "Sco
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScoreWorker.Models.Db", "ScoreWorker.Models.Db\ScoreWorker.Models.Db.csproj", "{8623B0CC-1F15-4ED0-B309-A0D714682D0C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScoreWorker.Models.Exceptions", "ScoreWorker.Models.Exceptions\ScoreWorker.Models.Exceptions.csproj", "{4BEDEDB7-3946-4DBE-B8E4-603E574A8E0C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{8623B0CC-1F15-4ED0-B309-A0D714682D0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8623B0CC-1F15-4ED0-B309-A0D714682D0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8623B0CC-1F15-4ED0-B309-A0D714682D0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4BEDEDB7-3946-4DBE-B8E4-603E574A8E0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BEDEDB7-3946-4DBE-B8E4-603E574A8E0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BEDEDB7-3946-4DBE-B8E4-603E574A8E0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BEDEDB7-3946-4DBE-B8E4-603E574A8E0C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -2,7 +2,7 @@
 using ScoreWorker.Models.Db;
 using ScoreWorker.Models.DTO;
 
-namespace ScoreWorker.Mapping;
+namespace ScoreWorker.Infrastructure.Mapping;
 
 public class MappingProfile : Profile
 {

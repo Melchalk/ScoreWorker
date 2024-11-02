@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DB\ScoreWorker.DB.csproj" />
+    <ProjectReference Include="..\ScoreWorker.Models.Db\ScoreWorker.Models.Db.csproj" />
     <ProjectReference Include="..\ScoreWorker.Models\ScoreWorker.Models.csproj" />
     <ProjectReference Include="..\ScoreWorker.RefitApi\ScoreWorker.RefitApi.csproj" />
   </ItemGroup>
