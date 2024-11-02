@@ -1,4 +1,4 @@
-﻿namespace ScoreWorker.Domain.Services.Interfaces;
+﻿namespace ScoreWorker.Domain.Interfaces;
 
 public interface IScoreWorkerService
 {

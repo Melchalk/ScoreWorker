@@ -1,18 +1,19 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Refit;
 using ScoreWorker.DB.Interfaces;
-using ScoreWorker.Domain.Services.Interfaces;
+using ScoreWorker.Domain.Interfaces;
 using ScoreWorker.Models.DTO;
 using ScoreWorker.RefitApi;
 using System.Text;
-using System.Text.Json;
+using WebLibrary.Backend.Models.Exceptions;
 
-namespace ScoreWorker.Domain.Services;
+namespace ScoreWorker.Domain;
 
 public class ScoreWorkerService : IScoreWorkerService
 {
-    private const string fileDb = "review_dataset.json";
-    private const string mainPrompt = "prompt.txt";
+    private const string mainPrompt = "MainPrompt.txt";
+    private const string selfPrompt = "SelfPrompt.txt";
 
     private readonly IDataProvider _provider;
     private readonly IMapper _mapper;
@@ -29,21 +30,21 @@ public class ScoreWorkerService : IScoreWorkerService
 
     public async Task<string> GetMainSummary(int id, CancellationToken cancellationToken)
     {
-        var allReviews = await LoadReviews(cancellationToken);
+        var dbReviews = _provider.Reviews
+            .AsNoTracking()
+            .Where(r => r.IDUnderReview == id && r.IDReviewer != id);
 
-        var reviews = allReviews!
-            .Where(r => r.IDUnderReview == id && r.IDReviewer != id)
-            .ToList();
+        if (!dbReviews.Any())
+        {
+            throw new BadRequestException($"Reviews with IDUnderReview = '{id}' was not found.");
+        }
+
+        var reviews = await _mapper.ProjectTo<ReviewInfo>(dbReviews)
+            .ToListAsync(cancellationToken);
+
         var prompt = await PreparePrompt(reviews, cancellationToken);
 
         return await EvaluateReviewsWithLLM(prompt, cancellationToken);
-    }
-
-    private async Task<List<ReviewInfo>?> LoadReviews(CancellationToken cancellationToken)
-    {
-        string jsonString = await File.ReadAllTextAsync(fileDb, cancellationToken);
-
-        return JsonSerializer.Deserialize<List<ReviewInfo>>(jsonString);
     }
 
     private async Task<string> PreparePrompt(List<ReviewInfo> reviews, CancellationToken cancellationToken)
@@ -51,11 +52,11 @@ public class ScoreWorkerService : IScoreWorkerService
         StringBuilder builder = new();
 
         for (int i = 1; i <= reviews.Count; i++)
-            builder.AppendLine($"Review {i}:\n{reviews[i-1].Review}");
+            builder.AppendLine($"Review {i}:\n{reviews[i - 1].Review}");
 
-        string jsonString = await File.ReadAllTextAsync(mainPrompt, cancellationToken);
+        string samplePrompt = await File.ReadAllTextAsync(mainPrompt, cancellationToken);
 
-        return string.Format(jsonString, builder.ToString());
+        return string.Format(samplePrompt, builder.ToString());
     }
 
     private async Task<string> EvaluateReviewsWithLLM(string prompt, CancellationToken cancellationToken)
@@ -80,13 +81,19 @@ public class ScoreWorkerService : IScoreWorkerService
 
     public async Task<string> GetSelfSummary(int id, CancellationToken cancellationToken)
     {
-        var allReviews = await LoadReviews(cancellationToken);
+        var dbReviews = _provider.Reviews
+            .AsNoTracking()
+            .Where(r => r.IDUnderReview == id && r.IDReviewer == id);
 
-        var reviews = allReviews!
-            .Where(r => r.IDUnderReview == id && r.IDReviewer != id)
-            .ToList();
+        if (!dbReviews.Any())
+        {
+            throw new BadRequestException($"Reviews with IDUnderReview = '{id}' was not found.");
+        }
 
-        var prompt = await PreparePrompt(reviews, cancellationToken);
+        var reviews = await _mapper.ProjectTo<ReviewInfo>(dbReviews)
+            .ToListAsync(cancellationToken);
+
+        var prompt = await File.ReadAllTextAsync(selfPrompt, cancellationToken);
 
         return await EvaluateReviewsWithLLM(prompt, cancellationToken);
     }

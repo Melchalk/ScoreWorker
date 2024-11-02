@@ -1,15 +1,14 @@
 ﻿using AutoMapper;
 using Refit;
 using ScoreWorker.DB.Interfaces;
-using ScoreWorker.Domain.Services.Interfaces;
+using ScoreWorker.Domain.Interfaces;
 using ScoreWorker.Models.Db;
 using ScoreWorker.Models.DTO;
 using ScoreWorker.RefitApi;
-using System.Data.Entity;
 using System.Text;
 using System.Text.Json;
 
-namespace ScoreWorker.Domain.Services;
+namespace ScoreWorker.Domain;
 
 public class TestSolution : ITestSolution
 {
@@ -64,7 +63,7 @@ public class TestSolution : ITestSolution
         StringBuilder builder = new();
 
         for (int i = 1; i <= reviews.Count; i++)
-            builder.AppendLine($"Review {i}:\n{reviews[i-1].Review}");
+            builder.AppendLine($"Review {i}:\n{reviews[i - 1].Review}");
 
         string jsonString = await File.ReadAllTextAsync(filePrompt);
 
