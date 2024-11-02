@@ -21,11 +21,11 @@ public class DbCountingReviewsConfiguration : IEntityTypeConfiguration<DbCountin
     public void Configure(EntityTypeBuilder<DbCountingReviews> builder)
     {
         builder.HasKey(o => o.Id);
-
+        /*
         builder
             .HasOne(cr => cr.Review)
             .WithMany(r => r.CountingReviews)
             .HasForeignKey(cr => cr.IDUnderReview)
-            .HasPrincipalKey(r => r.IDUnderReview);
+            .HasPrincipalKey(r => r.IDUnderReview);*/
     }
 }

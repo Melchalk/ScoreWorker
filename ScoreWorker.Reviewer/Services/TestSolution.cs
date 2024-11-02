@@ -5,6 +5,7 @@ using ScoreWorker.Domain.Services.Interfaces;
 using ScoreWorker.Models.Db;
 using ScoreWorker.Models.DTO;
 using ScoreWorker.RefitApi;
+using System.Data.Entity;
 using System.Text;
 using System.Text.Json;
 
@@ -42,7 +43,7 @@ public class TestSolution : ITestSolution
 
         var reviews = JsonSerializer.Deserialize<List<ReviewInfo>>(jsonString);
 
-        var dbReviews = _mapper.ProjectTo<DbReview>(reviews.AsQueryable());
+        var dbReviews = reviews.Select(r => _mapper.Map<DbReview>(r)).ToList();
 
         await _provider.Reviews.AddRangeAsync(dbReviews, cancellationToken);
 

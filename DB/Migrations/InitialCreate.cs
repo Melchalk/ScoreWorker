@@ -17,9 +17,9 @@ public partial class InitialCreate : Migration
             columns: table => new
             {
                 Id = table.Column<Guid>(nullable: false),
-                IDReviewer = table.Column<int>(nullable: false),
+                IDReviewer = table.Column<int>(nullable: true),
                 IDUnderReview = table.Column<int>(nullable: false),
-                Review = table.Column<string>(nullable: true)
+                Review = table.Column<string>(nullable: false)
             },
             constraints: table =>
             {
@@ -50,7 +50,7 @@ public partial class InitialCreate : Migration
                 IDUnderReview = table.Column<int>(nullable: false),
                 Type = table.Column<ScoreCriteriaType>(nullable: false),
                 Score = table.Column<int>(nullable: false),
-                Description = table.Column<string>(nullable: true)
+                Description = table.Column<string>(nullable: false)
             },
             constraints: table =>
             {
@@ -64,7 +64,7 @@ public partial class InitialCreate : Migration
                 Id = table.Column<Guid>(nullable: false),
                 IDUnderReview = table.Column<int>(nullable: false),
                 Type = table.Column<ReviewType>(nullable: false),
-                Count = table.Column<int>(nullable: true)
+                Count = table.Column<int>(nullable: false)
             },
             constraints: table =>
             {

@@ -22,11 +22,11 @@ public class DbCriteriaConfiguration : IEntityTypeConfiguration<DbScoreCriteria>
     public void Configure(EntityTypeBuilder<DbScoreCriteria> builder)
     {
         builder.HasKey(o => o.Id);
-
+        /*
         builder
             .HasOne(sc => sc.Review)
             .WithMany(r => r.ScoreCriteria)
             .HasForeignKey(sc => sc.IDUnderReview)
-            .HasPrincipalKey(r => r.IDUnderReview);
+            .HasPrincipalKey(r => r.IDUnderReview);*/
     }
 }

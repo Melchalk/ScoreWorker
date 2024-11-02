@@ -22,11 +22,11 @@ public class DbSummaryConfiguration : IEntityTypeConfiguration<DbSummary>
     public void Configure(EntityTypeBuilder<DbSummary> builder)
     {
         builder.HasKey(o => o.Id);
-
+        /*
         builder
             .HasOne(sc => sc.Review)
             .WithMany(r => r.Summaries)
             .HasForeignKey(sc => sc.IDUnderReview)
-            .HasPrincipalKey(r => r.IDUnderReview);
+            .HasPrincipalKey(r => r.IDUnderReview);*/
     }
 }
