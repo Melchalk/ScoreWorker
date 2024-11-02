@@ -1,15 +1,18 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
+using ScoreWorker.Models.Db;
 using ScoreWorker.Models.Enum;
 
 namespace ScoreWorkerDB.Migrations;
 
+[DbContext(typeof(ScoreWorkerDbContext))]
 [Migration("021120241438_InitialCreate")]
 public partial class InitialCreate : Migration
 {
     protected override void Up(MigrationBuilder migrationBuilder)
     {
         migrationBuilder.CreateTable(
-            name: "Reviews",
+            name: DbReview.TableName,
             columns: table => new
             {
                 Id = table.Column<Guid>(nullable: false),
@@ -23,7 +26,7 @@ public partial class InitialCreate : Migration
             });
 
         migrationBuilder.CreateTable(
-            name: "Summaries",
+            name: DbSummary.TableName,
             columns: table => new
             {
                 Id = table.Column<Guid>(nullable: false),
@@ -39,21 +42,22 @@ public partial class InitialCreate : Migration
             });
 
         migrationBuilder.CreateTable(
-            name: "Criteria",
+            name: DbScoreCriteria.TableName,
             columns: table => new
             {
                 Id = table.Column<Guid>(nullable: false),
+                IDUnderReview = table.Column<int>(nullable: false),
                 Type = table.Column<ScoreCriteriaType>(nullable: false),
                 Score = table.Column<int>(nullable: false),
                 Description = table.Column<string>(nullable: true)
             },
             constraints: table =>
             {
-                table.PrimaryKey("PK_Criteria", x => x.Id);
+                table.PrimaryKey("PK_ScoreCriteria", x => x.Id);
             });
 
         migrationBuilder.CreateTable(
-            name: "CountingReviews",
+            name: DbCountingReviews.TableName,
             columns: table => new
             {
                 Id = table.Column<Guid>(nullable: false),
@@ -69,9 +73,9 @@ public partial class InitialCreate : Migration
 
     protected override void Down(MigrationBuilder migrationBuilder)
     {
-        migrationBuilder.DropTable(name: "Reviews");
-        migrationBuilder.DropTable(name: "Summaries");
-        migrationBuilder.DropTable(name: "Criteria");
-        migrationBuilder.DropTable(name: "CountingReviews");
+        migrationBuilder.DropTable(name: DbReview.TableName);
+        migrationBuilder.DropTable(name: DbSummary.TableName);
+        migrationBuilder.DropTable(name: DbScoreCriteria.TableName);
+        migrationBuilder.DropTable(name: DbCountingReviews.TableName);
     }
 }

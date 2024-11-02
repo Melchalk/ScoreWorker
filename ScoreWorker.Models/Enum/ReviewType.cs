@@ -2,9 +2,7 @@
 
 public enum ReviewType
 {
-    PositiveConstructive,
-    PositiveUnconstructive,
+    Positive,
     Irrelevant,
-    NegativeConstructive,
-    NegativeUnconstructive
+    Negative,
 }

@@ -54,6 +54,6 @@ public class TestSolution : ITestSolution
             Temperature = 0.7
         };
 
-        return await apiService.GetProductsList(request);
+        return await apiService.GenerateScore(request);
     }
 }

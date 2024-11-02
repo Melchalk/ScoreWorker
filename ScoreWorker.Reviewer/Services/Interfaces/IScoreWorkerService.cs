@@ -2,5 +2,6 @@
 
 public interface IScoreWorkerService
 {
-    public Task<string> GetResponse(int id);
+    public Task<string> GetMainSummary(int id);
+    public Task<string> GetSelfSummary(int id);
 }

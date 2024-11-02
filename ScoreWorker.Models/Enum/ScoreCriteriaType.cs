@@ -2,8 +2,9 @@
 
 public enum ScoreCriteriaType
 {
-    Professionalism,
+    Leadership,
+    CommunicationSkills,
+    ProblemSolving,
     Teamwork,
-    Communication,
-    Initiative
+    Adaptability
 }
