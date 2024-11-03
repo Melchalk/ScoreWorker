@@ -34,4 +34,10 @@ public class TestController(
     {
         return await service.GetSelfSummary(id, token);
     }
+
+    [HttpGet("generate/summary/by/own")]
+    public async Task<string> GetOwnReviewsSummary([FromQuery] int id, CancellationToken token)
+    {
+        return await service.GetOwnReviewsSummary(id, token);
+    }
 }

@@ -9,6 +9,7 @@ public class GetSummaryResponse
     public required List<ScoreCriteriaInfo> ScoreCriteria { get; set; }
 
     public required string SelfSummary { get; set; }
+    public required string SummaryByOwnReviews { get; set; }
 
     public required string PositiveQuality { get; set; }
     public required string NegativeQuality { get; set; }

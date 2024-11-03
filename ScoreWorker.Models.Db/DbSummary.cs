@@ -10,6 +10,7 @@ public class DbSummary
     public Guid Id { get; set; }
     public int IDUnderReview { get; set; }
     public required string Summary { get; set; }
+    public string? SummaryByOwnReviews { get; set; }
     public required string SelfSummary { get; set; }
     public required string PositiveQuality { get; set; }
     public required string NegativeQuality { get; set; }

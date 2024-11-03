@@ -4,5 +4,6 @@ public enum PromptType
 {
     Main,
     Self,
-    Opinion
+    Opinion,
+    OwnReviews
 }

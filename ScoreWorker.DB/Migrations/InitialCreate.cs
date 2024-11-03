@@ -35,6 +35,7 @@ public partial class InitialCreate : Migration
                 PositiveReviewCount = table.Column<int>(nullable: false),
                 Summary = table.Column<string>(nullable: false),
                 SelfSummary = table.Column<string>(nullable: false),
+                SummaryByOwnReviews = table.Column<string>(nullable: true),
                 PositiveQuality = table.Column<string>(nullable: false),
                 NegativeQuality = table.Column<string>(nullable: false),
             },

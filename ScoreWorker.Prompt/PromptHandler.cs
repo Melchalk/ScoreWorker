@@ -2,6 +2,7 @@
 using ScoreWorker.Models.DTO;
 using ScoreWorker.Models.Enum;
 using ScoreWorker.Prompt.Interfaces;
+using ScoreWorker.PromptHelpers;
 using ScoreWorker.RefitApi;
 using System.Text;
 
@@ -9,16 +10,12 @@ namespace ScoreWorker.Prompt;
 
 public class PromptHandler : IPromptHandler
 {
-    private const string MAIN_PROMPT = "MainPrompt.txt";
-    private const string SELF_PROMPT = "SelfPrompt.txt";
-    private const string OPINION_PROMPT = "OpinionPrompt.txt";
-
     public async Task<string> GetSummary(
         PromptType promptType,
         List<ReviewInfo> reviews,
         CancellationToken cancellationToken)
     {
-        var filePath = SwitchPromptPath(promptType);
+        var filePath = PromptPathContainer.SwitchPromptPath(promptType);
 
         var prompt = await PreparePrompt(filePath, reviews, cancellationToken);
 
@@ -56,17 +53,6 @@ public class PromptHandler : IPromptHandler
         };
 
         return await apiService.GenerateScore(request);
-    }
-
-    private string SwitchPromptPath(PromptType promptType)
-    {
-        return promptType switch
-        {
-            PromptType.Main => MAIN_PROMPT,
-            PromptType.Self => SELF_PROMPT,
-            PromptType.Opinion => OPINION_PROMPT,
-            _ => throw new NotImplementedException(),
-        };
     }
 
     #endregion

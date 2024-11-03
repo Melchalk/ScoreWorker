@@ -53,6 +53,7 @@ public class ScoreWorkerService : IScoreWorkerService
         var response = _promptParser.ParseMainSummary(mainSummary);
 
         response.SelfSummary = await GetSelfSummary(id, cancellationToken);
+        response.SummaryByOwnReviews = await GetOwnReviewsSummary(id, cancellationToken);
 
         response.IDUnderReview = id;
         for (int i = 0; i < response.ScoreCriteria.Count; i++)
@@ -61,6 +62,16 @@ public class ScoreWorkerService : IScoreWorkerService
         }
 
         var dbSummary = _mapper.Map<DbSummary>(response);
+
+        var oldSummary = await _provider.Summaries
+            .FirstOrDefaultAsync(s => s.IDUnderReview == id, cancellationToken);
+
+        if (oldSummary is not null)
+        {
+            _provider.Summaries.Remove(oldSummary);
+
+            await _provider.SaveAsync(cancellationToken);
+        }
 
         await _provider.Summaries.AddAsync(dbSummary, cancellationToken);
 
@@ -121,4 +132,20 @@ public class ScoreWorkerService : IScoreWorkerService
         return await _promptHandler.GetSummary(PromptType.Opinion, reviews, cancellationToken);
     }
 
+    public async Task<string> GetOwnReviewsSummary(int id, CancellationToken cancellationToken)
+    {
+        var dbReviews = _provider.Reviews
+            .AsNoTracking()
+            .Where(r => r.IDReviewer == id);
+
+        if (!dbReviews.Any())
+        {
+            throw new BadRequestException($"Reviews with IDUnderReview = '{id}' were not found.");
+        }
+
+        var reviews = await _mapper.ProjectTo<ReviewInfo>(dbReviews)
+            .ToListAsync(cancellationToken);
+
+        return await _promptHandler.GetSummary(PromptType.OwnReviews, reviews, cancellationToken);
+    }
 }

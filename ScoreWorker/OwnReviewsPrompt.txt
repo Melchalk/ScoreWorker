@@ -1,0 +1,9 @@
+Here are the reviews made by an employee of a company about their coworkers:
+
+{0}
+
+Based on those reviews, evaluate how this employee fits into the team and how they feel about others.
+
+If there is not enough information, output "Недостаточно данных"
+Use no more than three sentences.
+Write your answer in Russian.
