@@ -4,6 +4,7 @@ using ScoreWorker.DB.Interfaces;
 using ScoreWorker.Domain.Interfaces;
 using ScoreWorker.Models.Db;
 using ScoreWorker.Models.DTO;
+using ScoreWorker.Models.Enum;
 using ScoreWorker.Prompt.Interfaces;
 using WebLibrary.Backend.Models.Exceptions;
 
@@ -35,7 +36,7 @@ public class ScoreWorkerService : IScoreWorkerService
             .Include(s => s.Reviews)
             .Include(s => s.ScoreCriteria)
             .Include(s => s.CountingReviews)
-            .FirstOrDefaultAsync(s => s.IDUnderReview == id)
+            .FirstOrDefaultAsync(s => s.IDUnderReview == id, cancellationToken)
         ?? throw new BadRequestException($"Review with IDUnderReview = '{id}' was not found.");
 
         var response = _mapper.Map<GetSummaryResponse>(dbSummary);
@@ -46,7 +47,8 @@ public class ScoreWorkerService : IScoreWorkerService
 
     public async Task<GetSummaryResponse> GenerateWorkersScore(int id, CancellationToken cancellationToken)
     {
-        var mainSummary = (await GetMainSummary(id, cancellationToken)).Replace("\\n", "\n");
+        var mainSummary = (await GetMainSummary(id, cancellationToken))
+            .Replace("\\n", "\n");
 
         var response = _promptParser.ParseMainSummary(mainSummary);
 
@@ -75,13 +77,13 @@ public class ScoreWorkerService : IScoreWorkerService
 
         if (!dbReviews.Any())
         {
-            throw new BadRequestException($"Reviews with IDUnderReview = '{id}' was not found.");
+            throw new BadRequestException($"Reviews with IDUnderReview = '{id}' were not found.");
         }
 
         var reviews = await _mapper.ProjectTo<ReviewInfo>(dbReviews)
             .ToListAsync(cancellationToken);
 
-        return await _promptHandler.GetSummary(reviews, cancellationToken);
+        return await _promptHandler.GetSummary(PromptType.Main, reviews, cancellationToken);
     }
 
     public async Task<string> GetSelfSummary(int id, CancellationToken cancellationToken)
@@ -92,12 +94,31 @@ public class ScoreWorkerService : IScoreWorkerService
 
         if (!dbReviews.Any())
         {
-            throw new BadRequestException($"Reviews with IDUnderReview = '{id}' was not found.");
+            throw new BadRequestException($"Reviews with IDUnderReview = '{id}' were not found.");
         }
 
         var reviews = await _mapper.ProjectTo<ReviewInfo>(dbReviews)
             .ToListAsync(cancellationToken);
 
-        return await _promptHandler.GetSummary(reviews, cancellationToken, isMain: false);
+        return await _promptHandler.GetSummary(PromptType.Self, reviews, cancellationToken);
     }
+
+    public async Task<string> GetOpinion(
+        int currentId, int researchId, CancellationToken cancellationToken)
+    {
+        var dbReviews = _provider.Reviews
+            .AsNoTracking()
+            .Where(r => r.IDUnderReview == researchId && r.IDReviewer == currentId);
+
+        if (!dbReviews.Any())
+        {
+            throw new BadRequestException($"Reviews with IDUnderReview = '{researchId}' were not found.");
+        }
+
+        var reviews = await _mapper.ProjectTo<ReviewInfo>(dbReviews)
+            .ToListAsync(cancellationToken);
+
+        return await _promptHandler.GetSummary(PromptType.Opinion, reviews, cancellationToken);
+    }
+
 }

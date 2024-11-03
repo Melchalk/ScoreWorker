@@ -40,7 +40,6 @@ public class Startup
                 );
             });
 
-
         services.AddDbContext<ScoreWorkerDbContext>(options =>
         {
             options.UseNpgsql(Configuration.GetConnectionString("SQLConnectionString"));
