@@ -15,8 +15,8 @@ public class ScoreWorkerController([FromServices] IScoreWorkerService service) :
     }
 
     [HttpGet("generate")]
-    public async Task GenerateWorkersScore([FromQuery] int id, CancellationToken token)
+    public async Task<GetSummaryResponse> GenerateWorkersScore([FromQuery] int id, CancellationToken token)
     {
-        await service.GenerateWorkersScore(id, token);
+        return await service.GenerateWorkersScore(id, token);
     }
 }
