@@ -16,7 +16,7 @@
     <ProjectReference Include="..\ScoreWorker.Models.Db\ScoreWorker.Models.Db.csproj" />
     <ProjectReference Include="..\ScoreWorker.Models.Exceptions\ScoreWorker.Models.Exceptions.csproj" />
     <ProjectReference Include="..\ScoreWorker.Models\ScoreWorker.Models.csproj" />
-    <ProjectReference Include="..\ScoreWorker.Prompt\ScoreWorker.Prompt.csproj" />
+    <ProjectReference Include="..\ScoreWorker.Prompt\ScoreWorker.PromptHelpers.csproj" />
     <ProjectReference Include="..\ScoreWorker.RefitApi\ScoreWorker.RefitApi.csproj" />
   </ItemGroup>
 

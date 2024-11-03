@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScoreWorker.Models.Db", "Sc
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScoreWorker.Models.Exceptions", "ScoreWorker.Models.Exceptions\ScoreWorker.Models.Exceptions.csproj", "{4BEDEDB7-3946-4DBE-B8E4-603E574A8E0C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScoreWorker.Prompt", "ScoreWorker.Prompt\ScoreWorker.Prompt.csproj", "{02AABD71-76E0-4BF3-AE17-8EFCFFF3B789}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScoreWorker.PromptHelpers", "ScoreWorker.Prompt\ScoreWorker.PromptHelpers.csproj", "{02AABD71-76E0-4BF3-AE17-8EFCFFF3B789}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -14,16 +14,7 @@ public class DbReview
     public int IDUnderReview { get; set; }
     public required string Review { get; set; }
 
-    public ICollection<DbCountingReviews> CountingReviews { get; set; }
-    public ICollection<DbScoreCriteria> ScoreCriteria { get; set; }
-    public ICollection<DbSummary> Summaries { get; set; }
-
-    public DbReview()
-    {
-        CountingReviews = new HashSet<DbCountingReviews>();
-        ScoreCriteria = new HashSet<DbScoreCriteria>();
-        Summaries = new HashSet<DbSummary>();
-    }
+    public DbSummary? Summary { get; set; }
 }
 
 public class DbReviewConfiguration : IEntityTypeConfiguration<DbReview>
@@ -31,5 +22,12 @@ public class DbReviewConfiguration : IEntityTypeConfiguration<DbReview>
     public void Configure(EntityTypeBuilder<DbReview> builder)
     {
         builder.HasKey(o => o.Id);
+
+
+        builder
+            .HasOne(r => r.Summary)
+            .WithMany(s => s.Reviews)
+            .HasForeignKey(r => r.IDUnderReview)
+            .HasPrincipalKey(s => s.IDUnderReview);
     }
 }

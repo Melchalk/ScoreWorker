@@ -14,7 +14,16 @@ public class DbSummary
     public double UtilityCoefficient { get; set; }
     public double SocialRating { get; set; }
 
-    public DbReview? Review { get; set; }
+    public ICollection<DbCountingReviews> CountingReviews { get; set; }
+    public ICollection<DbScoreCriteria> ScoreCriteria { get; set; }
+    public ICollection<DbReview> Reviews { get; set; }
+
+    public DbSummary()
+    {
+        CountingReviews = new HashSet<DbCountingReviews>();
+        ScoreCriteria = new HashSet<DbScoreCriteria>();
+        Reviews = new HashSet<DbReview>();
+    }
 }
 
 public class DbSummaryConfiguration : IEntityTypeConfiguration<DbSummary>
@@ -22,11 +31,5 @@ public class DbSummaryConfiguration : IEntityTypeConfiguration<DbSummary>
     public void Configure(EntityTypeBuilder<DbSummary> builder)
     {
         builder.HasKey(o => o.Id);
-        /*
-        builder
-            .HasOne(sc => sc.Review)
-            .WithMany(r => r.Summaries)
-            .HasForeignKey(sc => sc.IDUnderReview)
-            .HasPrincipalKey(r => r.IDUnderReview);*/
     }
 }

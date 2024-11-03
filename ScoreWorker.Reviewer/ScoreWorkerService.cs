@@ -29,6 +29,19 @@ public class ScoreWorkerService : IScoreWorkerService
 
     public async Task<GetSummaryResponse> GetWorkersScore(int id, CancellationToken cancellationToken)
     {
+        var dbSummary = await _provider.Summaries
+            .AsNoTracking()
+            .Include(s => s.Reviews)
+            .Include(s => s.ScoreCriteria)
+            .Include(s => s.CountingReviews)
+            .FirstOrDefaultAsync(s => s.IDUnderReview == id)
+        ?? throw new BadRequestException($"Review with IDUnderReview = '{id}' was not found.");
+
+        throw new Exception();
+    }
+    
+    public async Task<GetSummaryResponse> GenerateWorkersScore(int id, CancellationToken cancellationToken)
+    {
         var mainSummary = await GetMainSummary(id, cancellationToken);
 
         var response = _promptParser.ParseMainSummary(mainSummary);

@@ -13,7 +13,7 @@ public class DbCountingReviews
     public ReviewType Type { get; set; }
     public int Count { get; set; }
 
-    public DbReview? Review { get; set; }
+    public DbSummary? Summary { get; set; }
 }
 
 public class DbCountingReviewsConfiguration : IEntityTypeConfiguration<DbCountingReviews>
@@ -21,11 +21,11 @@ public class DbCountingReviewsConfiguration : IEntityTypeConfiguration<DbCountin
     public void Configure(EntityTypeBuilder<DbCountingReviews> builder)
     {
         builder.HasKey(o => o.Id);
-        /*
+
         builder
-            .HasOne(cr => cr.Review)
-            .WithMany(r => r.CountingReviews)
+            .HasOne(cr => cr.Summary)
+            .WithMany(s => s.CountingReviews)
             .HasForeignKey(cr => cr.IDUnderReview)
-            .HasPrincipalKey(r => r.IDUnderReview);*/
+            .HasPrincipalKey(s => s.IDUnderReview);
     }
 }

@@ -14,7 +14,7 @@ public class DbScoreCriteria
     public int Score { get; set; }
     public required string Description { get; set; }
 
-    public DbReview? Review { get; set; }
+    public DbSummary? Summary { get; set; }
 }
 
 public class DbCriteriaConfiguration : IEntityTypeConfiguration<DbScoreCriteria>
@@ -22,11 +22,11 @@ public class DbCriteriaConfiguration : IEntityTypeConfiguration<DbScoreCriteria>
     public void Configure(EntityTypeBuilder<DbScoreCriteria> builder)
     {
         builder.HasKey(o => o.Id);
-        /*
+
         builder
-            .HasOne(sc => sc.Review)
-            .WithMany(r => r.ScoreCriteria)
+            .HasOne(sc => sc.Summary)
+            .WithMany(s => s.ScoreCriteria)
             .HasForeignKey(sc => sc.IDUnderReview)
-            .HasPrincipalKey(r => r.IDUnderReview);*/
+            .HasPrincipalKey(s => s.IDUnderReview);
     }
 }

@@ -11,5 +11,7 @@ public class MappingProfile : Profile
         CreateMap<DbReview, ReviewInfo>();
         CreateMap<ReviewInfo, DbReview>()
             .ForMember(db => db.Id, opt => opt.MapFrom(_ => Guid.NewGuid()));
+
+
     }
 }
