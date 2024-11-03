@@ -3,6 +3,6 @@
 public enum ReviewType
 {
     Positive,
-    Irrelevant,
+    Invalid,
     Negative,
 }

@@ -8,7 +8,6 @@ public class DbReview
 {
     public const string TableName = "Reviews";
 
-    [Key]
     public Guid Id { get; set; }
     public int? IDReviewer { get; set; }
     public int IDUnderReview { get; set; }

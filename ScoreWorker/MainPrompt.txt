@@ -11,7 +11,9 @@ Adaptability
 For each criterion:
 
 Assign a score on a 5-point scale (where 1 represents low performance and 5 represents high performance).
-Provide a brief comment using appropriate terminology and vocabulary related to the criterion. To prove your point, you may quote a few reviews that mention that quality. Do not mention review ID's.
+Provide a brief comment using appropriate terminology and vocabulary related to the criterion. To prove your point, you may quote a few reviews that mention that quality (no more than 2 quotes, and the comment should contain other information other than quotes).
+When you quote, use apostrophe symbols ()' instead of qotation marks. Do not mention review ID's.
+
 Based on those scores and comments, provide the conclusion about the employee in a few sentences.
 
 Analyze every review based on it's connotations about the employee and assign it a rating (poisitive or negative). 
@@ -19,7 +21,8 @@ If a review doesn't hold any relevant information about the employee, assign it 
 
 Based on the reviews, provide the biggest strength of the employee (most frequently praised quality) and their biggest weakneess. Use no more than two sentences. 
 
-The commentaties and the conclusion should be presented in Russian. Separate paragraphs scrictly with two new lines (\n\n).
+The commentaties and the conclusion should be presented in Russian. Separate paragraphs strictly with two new lines (\n\n).
+Do not use carriage return characters (\r) in your output.
 
 As an example of how to present your answer, use the following text (names of the qualities should be written without spaces between words, and main strength and weakness should be presented as "Pro - (strength) \n Con - (weakness)"):
 

@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
-using ScoreWorker.DB;
 using ScoreWorker.Models.Db;
 using ScoreWorker.Models.Enum;
 
@@ -32,10 +31,10 @@ public partial class InitialCreate : Migration
             {
                 Id = table.Column<Guid>(nullable: false),
                 IDUnderReview = table.Column<int>(nullable: false),
-                CountReviewTo = table.Column<int>(nullable: false),
-                CountReviewFrom = table.Column<int>(nullable: false),
-                UtilityCoefficient = table.Column<double>(nullable: false),
-                SocialRating = table.Column<double>(nullable: false),
+                AllReviewCount = table.Column<int>(nullable: false),
+                Summary = table.Column<string>(nullable: false),
+                PositiveQuality = table.Column<string>(nullable: false),
+                NegativeQuality = table.Column<string>(nullable: false),
             },
             constraints: table =>
             {

@@ -12,6 +12,15 @@ public class MappingProfile : Profile
         CreateMap<ReviewInfo, DbReview>()
             .ForMember(db => db.Id, opt => opt.MapFrom(_ => Guid.NewGuid()));
 
+        CreateMap<DbSummary, GetSummaryResponse>();
+        CreateMap<GetSummaryResponse, DbSummary>()
+            .ForMember(db => db.Id, opt => opt.MapFrom(_ => Guid.NewGuid()));
+
+        CreateMap<DbScoreCriteria, GetSummaryResponse>();
+        CreateMap<GetSummaryResponse, DbScoreCriteria>()
+            .ForMember(db => db.Id, opt => opt.MapFrom(_ => Guid.NewGuid()));
+
+        CreateMap<ScoreCriteriaInfo, DbScoreCriteria>().ReverseMap();
 
     }
 }
