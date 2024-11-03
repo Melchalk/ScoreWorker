@@ -16,12 +16,14 @@ When you quote, use apostrophe symbols ()' instead of qotation marks. Do not men
 
 Based on those scores and comments, provide the conclusion about the employee in a few sentences.
 
-Analyze every review based on it's connotations about the employee and assign it a rating (poisitive or negative). 
+Analyze every review based on it's connotations about the employee and assign it a rating (strictly "poisitive" or "negative"). 
 If a review doesn't hold any relevant information about the employee, assign it with an "invalid" rating instead.
 
 Based on the reviews, provide the biggest strength of the employee (most frequently praised quality) and their biggest weakneess. Use no more than two sentences. 
 
-The commentaties and the conclusion should be presented in Russian. Separate paragraphs strictly with two new lines (\n\n).
+The commentaties and the conclusion should be presented in Russian. 
+Names of the criteria, as well as review ratings, should be presented in English. 
+Separate paragraphs strictly with two new lines (\n\n).
 Do not use carriage return characters (\r) in your output.
 
 As an example of how to present your answer, use the following text (names of the qualities should be written without spaces between words, and main strength and weakness should be presented as "Pro - (strength) \n Con - (weakness)"):

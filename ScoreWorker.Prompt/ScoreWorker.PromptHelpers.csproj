@@ -11,7 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DB\ScoreWorker.DB.csproj" />
     <ProjectReference Include="..\ScoreWorker.Models.Db\ScoreWorker.Models.Db.csproj" />
     <ProjectReference Include="..\ScoreWorker.Models.Exceptions\ScoreWorker.Models.Exceptions.csproj" />
     <ProjectReference Include="..\ScoreWorker.Models\ScoreWorker.Models.csproj" />

@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScoreWorker", "ScoreWorker\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScoreWorker.Models", "ScoreWorker.Models\ScoreWorker.Models.csproj", "{63E434C2-BD90-4BC2-942C-CDF9587A06AC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScoreWorker.DB", "DB\ScoreWorker.DB.csproj", "{2BAED63A-4D48-4DB8-8031-66673A13FB7F}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScoreWorker.Domain", "ScoreWorker.Reviewer\ScoreWorker.Domain.csproj", "{B7779E08-4DB4-462F-9777-4D8CC51AD127}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScoreWorker.RefitApi", "ScoreWorker.RefitApi\ScoreWorker.RefitApi.csproj", "{00C3B115-FA34-4CC1-8653-8828138CFE37}"
@@ -17,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScoreWorker.Models.Db", "Sc
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScoreWorker.Models.Exceptions", "ScoreWorker.Models.Exceptions\ScoreWorker.Models.Exceptions.csproj", "{4BEDEDB7-3946-4DBE-B8E4-603E574A8E0C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScoreWorker.PromptHelpers", "ScoreWorker.Prompt\ScoreWorker.PromptHelpers.csproj", "{02AABD71-76E0-4BF3-AE17-8EFCFFF3B789}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScoreWorker.PromptHelpers", "ScoreWorker.Prompt\ScoreWorker.PromptHelpers.csproj", "{02AABD71-76E0-4BF3-AE17-8EFCFFF3B789}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScoreWorker.DB", "ScoreWorker.DB\ScoreWorker.DB.csproj", "{AEC806E9-3D2C-4BD2-BD4F-3A49808E0491}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,10 +33,6 @@ Global
 		{63E434C2-BD90-4BC2-942C-CDF9587A06AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{63E434C2-BD90-4BC2-942C-CDF9587A06AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{63E434C2-BD90-4BC2-942C-CDF9587A06AC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2BAED63A-4D48-4DB8-8031-66673A13FB7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2BAED63A-4D48-4DB8-8031-66673A13FB7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2BAED63A-4D48-4DB8-8031-66673A13FB7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2BAED63A-4D48-4DB8-8031-66673A13FB7F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B7779E08-4DB4-462F-9777-4D8CC51AD127}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B7779E08-4DB4-462F-9777-4D8CC51AD127}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7779E08-4DB4-462F-9777-4D8CC51AD127}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -57,6 +53,10 @@ Global
 		{02AABD71-76E0-4BF3-AE17-8EFCFFF3B789}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{02AABD71-76E0-4BF3-AE17-8EFCFFF3B789}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{02AABD71-76E0-4BF3-AE17-8EFCFFF3B789}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEC806E9-3D2C-4BD2-BD4F-3A49808E0491}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEC806E9-3D2C-4BD2-BD4F-3A49808E0491}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEC806E9-3D2C-4BD2-BD4F-3A49808E0491}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEC806E9-3D2C-4BD2-BD4F-3A49808E0491}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

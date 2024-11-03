@@ -1,7 +1,7 @@
 {0}
 
 The provided reviews were made by an employee about themselves as a part of a self-review program. 
-Write no more than five sentences.
+Write no more than four sentences. The output should be in Russian.
 Provide a short summary of the key points to show employee's opinion of themselves and how they evaluate their skills.
 
 If there are no reviews present or they don't have any information about the employee, output "Not enough Data". 
