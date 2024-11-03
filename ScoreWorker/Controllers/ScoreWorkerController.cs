@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Hangfire;
+using Microsoft.AspNetCore.Mvc;
 using ScoreWorker.Domain.Interfaces;
 using ScoreWorker.Models.DTO;
 
@@ -15,8 +16,11 @@ public class ScoreWorkerController([FromServices] IScoreWorkerService service) :
     }
 
     [HttpGet("generate")]
-    public async Task<GetSummaryResponse> GenerateWorkersScore([FromQuery] int id, CancellationToken token)
+    public void GenerateWorkersScore([FromQuery] int id, CancellationToken token)
     {
-        return await service.GenerateWorkersScore(id, token);
+        var now = DateTime.UtcNow;
+
+        RecurringJob.AddOrUpdate("GenerateWorkersScore", () =>
+            service.GenerateWorkersScore(id, token), $"{now.Minute + 1} {now.Hour} * * *");
     }
 }

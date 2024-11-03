@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ScoreWorker.Domain.Interfaces;
+using ScoreWorker.Models.DTO;
 
 namespace ScoreWorker.Controllers;
 
@@ -10,10 +11,10 @@ public class TestController(
     [FromServices] IScoreWorkerService service)
     : ControllerBase
 {
-    [HttpGet("generate")]
-    public async Task<string> GetTestScore(CancellationToken token)
+    [HttpGet("generate/get/model")]
+    public async Task<GetSummaryResponse> GenerateWorkersScore([FromQuery] int id, CancellationToken token)
     {
-        return await sampleSolution.GetResponse();
+        return await service.GenerateWorkersScore(id, token);
     }
 
     [HttpGet("update/database")]

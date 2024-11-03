@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Hangfire;
+using Hangfire.PostgreSql;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 using Refit;
@@ -64,6 +66,20 @@ public class Startup
         services.AddHttpContextAccessor();
 
         services.AddSwaggerGen();
+
+        services.AddHangfire(options =>
+        {
+            options.UsePostgreSqlStorage(optPostgres =>
+            {
+                optPostgres.UseNpgsqlConnection(Configuration.GetConnectionString("SQLConnectionString"));
+            });
+            options.UseFilter(new AutomaticRetryAttribute
+            {
+                Attempts = 0
+            });
+        });
+
+        services.AddHangfireServer();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -92,8 +108,11 @@ public class Startup
 
         app.UseEndpoints(endpoints =>
         {
+            endpoints.MapHangfireDashboard();
             endpoints.MapControllers().RequireCors("CorsPolicy");
         });
+
+        app.UseHangfireDashboard();
     }
 
     private void UpdateDatabase(IApplicationBuilder app)
