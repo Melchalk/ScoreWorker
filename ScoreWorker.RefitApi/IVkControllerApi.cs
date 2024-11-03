@@ -3,6 +3,9 @@ using ScoreWorker.Models.DTO;
 
 namespace ScoreWorker.RefitApi;
 
+/// <summary>
+/// Interface for interacting with the generation API
+/// </summary>
 public interface IVkControllerApi
 {
     public const string VkScoreWorkerApi = "https://vk-scoreworker-case-backup.olymp.innopolis.university";

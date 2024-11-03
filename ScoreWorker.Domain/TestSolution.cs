@@ -1,11 +1,8 @@
 ﻿using AutoMapper;
-using Refit;
 using ScoreWorker.DB.Interfaces;
 using ScoreWorker.Domain.Interfaces;
 using ScoreWorker.Models.Db;
 using ScoreWorker.Models.DTO;
-using ScoreWorker.RefitApi;
-using System.Text;
 using System.Text.Json;
 
 namespace ScoreWorker.Domain;
@@ -31,7 +28,7 @@ public class TestSolution : ITestSolution
 
         var reviews = JsonSerializer.Deserialize<List<ReviewInfo>>(jsonString);
 
-        var dbReviews = reviews.Select(r => _mapper.Map<DbReview>(r)).ToList();
+        var dbReviews = reviews!.Select(r => _mapper.Map<DbReview>(r)).ToList();
 
         await _provider.Reviews.AddRangeAsync(dbReviews, cancellationToken);
 

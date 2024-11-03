@@ -2,6 +2,9 @@
 
 namespace ScoreWorker.PromptHelpers;
 
+/// <summary>
+/// Static class for storing and defining the required prompt file
+/// </summary>
 public static class PromptPathContainer
 {
     private const string MAIN_PROMPT = "MainPrompt.txt";

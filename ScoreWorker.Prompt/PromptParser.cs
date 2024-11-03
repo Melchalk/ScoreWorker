@@ -25,6 +25,7 @@ public class PromptParser : IPromptParser
             Score = scoreCriteria.Select(s => s.Score).Average(),
             ScoreCriteria = scoreCriteria,
             SelfSummary = string.Empty,
+            SummaryByOwnReviews = string.Empty,
             PositiveQuality = qualities.positive,
             NegativeQuality = qualities.negative,
             PositiveReviewCount = countReview.positive,

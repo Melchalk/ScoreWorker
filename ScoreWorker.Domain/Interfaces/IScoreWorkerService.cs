@@ -2,6 +2,9 @@
 
 namespace ScoreWorker.Domain.Interfaces;
 
+/// <summary>
+/// Intermediate service for interaction between AI and database
+/// </summary>
 public interface IScoreWorkerService
 {
     public Task<GetSummaryResponse> GetWorkersScore(int id, CancellationToken cancellationToken);

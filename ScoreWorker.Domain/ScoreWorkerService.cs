@@ -29,6 +29,13 @@ public class ScoreWorkerService : IScoreWorkerService
         _promptParser = promptParser;
     }
 
+    /// <summary>
+    ///  Method to get summary from database
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    /// <exception cref="BadRequestException"></exception>
     public async Task<GetSummaryResponse> GetWorkersScore(int id, CancellationToken cancellationToken)
     {
         var dbSummary = await _provider.Summaries
@@ -45,6 +52,12 @@ public class ScoreWorkerService : IScoreWorkerService
         return response;
     }
 
+    /// <summary>
+    /// Method for generating summary and writing to databases
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     public async Task<GetSummaryResponse> GenerateWorkersScore(int id, CancellationToken cancellationToken)
     {
         var mainSummary = (await GetMainSummary(id, cancellationToken))
