@@ -8,7 +8,7 @@ namespace ScoreWorker.DB;
 public class ScoreWorkerDbContext : DbContext, IDataProvider
 {
     public DbSet<DbReview> Reviews { get; set; }
-    public DbSet<DbScoreCriteria> Criteria { get; set; }
+    public DbSet<DbScoreCriteria> ScoreCriteria { get; set; }
     public DbSet<DbSummary> Summaries { get; set; }
     public DbSet<DbCountingReviews> CountingReviews { get; set; }
 

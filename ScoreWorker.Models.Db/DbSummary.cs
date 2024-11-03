@@ -10,9 +10,10 @@ public class DbSummary
     public Guid Id { get; set; }
     public int IDUnderReview { get; set; }
     public required string Summary { get; set; }
-    public int PositiveReviewCount { get; set; }
+    public required string SelfSummary { get; set; }
     public required string PositiveQuality { get; set; }
     public required string NegativeQuality { get; set; }
+    public int PositiveReviewCount { get; set; }
     public int AllReviewCount { get; set; }
 
     public ICollection<DbCountingReviews> CountingReviews { get; set; }

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using ScoreWorker.DB.Interfaces;
 using ScoreWorker.Domain.Interfaces;
+using ScoreWorker.Models.Db;
 using ScoreWorker.Models.DTO;
 using ScoreWorker.Prompt.Interfaces;
 using WebLibrary.Backend.Models.Exceptions;
@@ -29,29 +30,39 @@ public class ScoreWorkerService : IScoreWorkerService
 
     public async Task<GetSummaryResponse> GetWorkersScore(int id, CancellationToken cancellationToken)
     {
-        string samplePrompt = (await File.ReadAllTextAsync("text.txt", cancellationToken))
-            .Replace("\\n", "\n");
-
-        var mainSummary = _promptParser.ParseMainSummary(samplePrompt);
-
-        /*var dbSummary = await _provider.Summaries
+        var dbSummary = await _provider.Summaries
             .AsNoTracking()
             .Include(s => s.Reviews)
             .Include(s => s.ScoreCriteria)
             .Include(s => s.CountingReviews)
             .FirstOrDefaultAsync(s => s.IDUnderReview == id)
         ?? throw new BadRequestException($"Review with IDUnderReview = '{id}' was not found.");
-        */
-        return mainSummary;
+
+        var response = _mapper.Map<GetSummaryResponse>(dbSummary);
+        response.Score = response.ScoreCriteria.Select(s => s.Score).Average();
+
+        return response;
     }
 
     public async Task<GetSummaryResponse> GenerateWorkersScore(int id, CancellationToken cancellationToken)
     {
-        var mainSummary = await GetMainSummary(id, cancellationToken);
+        var mainSummary = (await GetMainSummary(id, cancellationToken)).Replace("\\n", "\n");
 
         var response = _promptParser.ParseMainSummary(mainSummary);
 
         response.SelfSummary = await GetSelfSummary(id, cancellationToken);
+
+        response.IDUnderReview = id;
+        for (int i = 0; i < response.ScoreCriteria.Count; i++)
+        {
+            response.ScoreCriteria[i].IDUnderReview = id;
+        }
+
+        var dbSummary = _mapper.Map<DbSummary>(response);
+
+        await _provider.Summaries.AddAsync(dbSummary, cancellationToken);
+
+        await _provider.SaveAsync(cancellationToken);
 
         return response;
     }

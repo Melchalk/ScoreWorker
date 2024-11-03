@@ -33,7 +33,8 @@ public class PromptHandler : IPromptHandler
         for (int i = 1; i <= reviews.Count; i++)
             builder.AppendLine($"Review {i}:\n{reviews[i - 1].Review}");
 
-        string samplePrompt = await File.ReadAllTextAsync(filePrompt, cancellationToken);
+        string samplePrompt = (await File.ReadAllTextAsync(filePrompt, cancellationToken))
+            .Replace("\\n", "\n");
 
         return string.Format(samplePrompt, builder.ToString());
     }
