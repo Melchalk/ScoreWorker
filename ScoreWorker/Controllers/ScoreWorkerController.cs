@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ScoreWorker.Domain.Interfaces;
+using ScoreWorker.Models.DTO;
 
 namespace ScoreWorker.Controllers;
 
@@ -20,8 +21,8 @@ public class ScoreWorkerController([FromServices] IScoreWorkerService service) :
     }
 
     [HttpGet("get/summary")]
-    public async Task GetAfterSummary([FromQuery] int id, CancellationToken token)
+    public async Task<GetSummaryResponse> GetAfterSummary([FromQuery] int id, CancellationToken token)
     {
-        
+        return await service.GetWorkersScore(id, token);
     }
 }

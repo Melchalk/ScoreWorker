@@ -1,3 +1,5 @@
+Based on the reviews, provide the biggest strength of the employee (most frequently praised quality) and their biggest weakneess. Use no more than two sentences. 
+
 Here are some reviews about an employee:
 {0}
 
@@ -40,3 +42,8 @@ This employee is... (add your conclusion here)
 4: Invalid
 5: Positive
 6: Negative
+
+
+Pro - Excelent teamwork skills, gets along with everyone.
+
+Con - Lacks initiative, doesn't try to push forward their ideas.

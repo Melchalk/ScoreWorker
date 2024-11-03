@@ -1,4 +1,7 @@
-На оснонове предоставленных ревью напиши подробную самооценку сотрудника, в которой он отражает свои профессиональные качества, 
-достижения, сильные стороны и области для развития.
-Включи конкретные примеры проектов или задач, в которых сотрудник проявил себя, и опиши, как его вклад повлиял
-на общие цели компании
+{0}
+
+The provided reviews were made by an employee about themselves as a part of a self-review program. 
+Write no more than five sentences.
+Provide a short summary of the key points to show employee's opinion of themselves and how they evaluate their skills.
+
+If there are no reviews present or they don't have any information about the employee, output "Not enough Data". 

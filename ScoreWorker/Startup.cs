@@ -8,6 +8,8 @@ using ScoreWorker.Domain;
 using ScoreWorker.Domain.Interfaces;
 using ScoreWorker.Infrastructure.Mapping;
 using ScoreWorker.Infrastructure.Middlewares;
+using ScoreWorker.Prompt;
+using ScoreWorker.Prompt.Interfaces;
 using ScoreWorker.RefitApi;
 
 namespace ScoreWorker;
@@ -52,6 +54,9 @@ public class Startup
         services.AddRefitClient<IVkControllerApi>();
 
         services.AddScoped<IDataProvider, ScoreWorkerDbContext>();
+
+        services.AddScoped<IPromptHandler, PromptHandler>();
+        services.AddScoped<IPromptParser, PromptParser>();
 
         services.AddScoped<ITestSolution, TestSolution>();
         services.AddScoped<IScoreWorkerService, ScoreWorkerService>();
