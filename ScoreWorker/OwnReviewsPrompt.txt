@@ -6,4 +6,4 @@ Based on those reviews, evaluate how this employee fits into the team and how th
 
 If there is not enough information, output "Недостаточно данных"
 Use no more than three sentences.
-Write your answer in Russian.
+Write your answer specificly in Russian.
