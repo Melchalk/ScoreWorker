@@ -3,5 +3,5 @@ Here is a base of reviews that employee A written about employee B:
 {0}
 
 Based on those reviews, provide a short summary (no more than three sentences) about employee A opinion about B and their compatability. If there is not enough relevant information or there is no reviews, output "Not enough information" instead. 
-The output should be written in Russian.
+The output should be written strictly in Russian, including the introduction.
 Take a deep breath and work on this problem step-by-step
