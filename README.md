@@ -28,6 +28,7 @@ https://github.com/1rd0/FrontVKSCOREWorker
 
 Бэк:
    Клонировать репозиторий.
+   Убедиться, что установлен PostgresSql и есть user postgres без пароля. Если пароль есть то поменять его в appsettings.Development.
    Запустить файл ScoreWorker.sln.
    При первом взаимодействии по адресу http://localhost:5000/swagger обратиться к endpoint /api/test/update/database и после api/generate для генерации первичных данных.
    Далее взаимодействие строится через фронт
