@@ -120,7 +120,7 @@ public class PromptParser : IPromptParser
             var records = paragraph.Split('\n');
 
             var matchFirst = records[0][(records[0].IndexOf('-') + 2)..];
-            var matchSecond = records[1][(records[1].IndexOf('-') + 2)..^-1];
+            var matchSecond = records[1][(records[1].IndexOf('-') + 2)..];
 
             qualities.positive = records[0].StartsWith("Pro") ? matchFirst : matchSecond;
             qualities.negative = records[0].StartsWith("Pro") ? matchSecond : matchFirst;
