@@ -1,7 +1,7 @@
 ﻿using ScoreWorker.Models.DTO;
 using ScoreWorker.Models.Enum;
 
-namespace ScoreWorker.Prompt.Interfaces;
+namespace ScoreWorker.PromptHelpers.Interfaces;
 
 /// <summary>
 /// Interface for creating, processing and sending a prompt

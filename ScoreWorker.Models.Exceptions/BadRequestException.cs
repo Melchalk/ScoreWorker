@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace WebLibrary.Backend.Models.Exceptions;
+namespace ScoreWorker.Models.Exceptions;
 
 public class BadRequestException(string message) : StatusCodeException(message, statusCode)
 {

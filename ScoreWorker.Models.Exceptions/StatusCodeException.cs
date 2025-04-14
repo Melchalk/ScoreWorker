@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace WebLibrary.Backend.Models.Exceptions;
+namespace ScoreWorker.Models.Exceptions;
 
 public class StatusCodeException(string message, HttpStatusCode statusCode) : Exception(message)
 {

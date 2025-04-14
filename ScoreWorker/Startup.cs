@@ -10,8 +10,8 @@ using ScoreWorker.Domain;
 using ScoreWorker.Domain.Interfaces;
 using ScoreWorker.Infrastructure.Mapping;
 using ScoreWorker.Infrastructure.Middlewares;
-using ScoreWorker.Prompt;
-using ScoreWorker.Prompt.Interfaces;
+using ScoreWorker.PromptHelpers;
+using ScoreWorker.PromptHelpers.Interfaces;
 using ScoreWorker.RefitApi;
 
 namespace ScoreWorker;

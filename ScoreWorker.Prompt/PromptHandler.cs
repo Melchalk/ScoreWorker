@@ -1,12 +1,11 @@
 ﻿using Refit;
 using ScoreWorker.Models.DTO;
 using ScoreWorker.Models.Enum;
-using ScoreWorker.Prompt.Interfaces;
-using ScoreWorker.PromptHelpers;
+using ScoreWorker.PromptHelpers.Interfaces;
 using ScoreWorker.RefitApi;
 using System.Text;
 
-namespace ScoreWorker.Prompt;
+namespace ScoreWorker.PromptHelpers;
 
 public class PromptHandler : IPromptHandler
 {

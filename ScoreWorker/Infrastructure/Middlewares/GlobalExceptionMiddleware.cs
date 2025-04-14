@@ -1,6 +1,6 @@
-﻿using Serilog;
+﻿using ScoreWorker.Models.Exceptions;
+using Serilog;
 using System.Net;
-using WebLibrary.Backend.Models.Exceptions;
 
 namespace ScoreWorker.Infrastructure.Middlewares;
 

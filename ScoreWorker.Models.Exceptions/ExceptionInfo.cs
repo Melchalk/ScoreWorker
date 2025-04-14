@@ -1,4 +1,4 @@
-﻿namespace WebLibrary.Backend.Models.Exceptions;
+﻿namespace ScoreWorker.Models.Exceptions;
 
 public class ExceptionInfo
 {

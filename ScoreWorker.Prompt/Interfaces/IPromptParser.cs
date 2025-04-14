@@ -1,6 +1,6 @@
 ﻿using ScoreWorker.Models.DTO;
 
-namespace ScoreWorker.Prompt.Interfaces;
+namespace ScoreWorker.PromptHelpers.Interfaces;
 
 /// <summary>
 /// Interface for converting the received prompt into a model

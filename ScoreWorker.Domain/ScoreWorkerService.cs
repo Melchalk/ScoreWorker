@@ -5,8 +5,8 @@ using ScoreWorker.Domain.Interfaces;
 using ScoreWorker.Models.Db;
 using ScoreWorker.Models.DTO;
 using ScoreWorker.Models.Enum;
-using ScoreWorker.Prompt.Interfaces;
-using WebLibrary.Backend.Models.Exceptions;
+using ScoreWorker.Models.Exceptions;
+using ScoreWorker.PromptHelpers.Interfaces;
 
 namespace ScoreWorker.Domain;
 
